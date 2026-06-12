@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenwood Travel | HubSpot Audit Summary and Way Forward | BBD Boom</title>
+<style>
+  :root{
+    --navy:#2B4870;
+    --navy-deep:#223A5C;
+    --navy-soft:#3A5C8C;
+    --teal:#1FB6AC;
+    --teal-bright:#27CFC3;
+    --teal-soft:#E6F7F5;
+    --ink:#27374D;
+    --slate:#4A5A72;
+    --mist:#7C8AA0;
+    --cloud:#F5F8FB;
+    --line:#E2E8F0;
+    --white:#FFFFFF;
+    --crit:#DC2626;
+    --crit-bg:#FCE9E9;
+    --high:#E08A00;
+    --high-bg:#FCF1DD;
+    --med:#2563EB;
+    --med-bg:#E6EEFD;
+    --low:#7A879B;
+    --low-bg:#EEF1F5;
+    --shadow:0 10px 30px rgba(43,72,112,0.08);
+    --shadow-lift:0 18px 44px rgba(43,72,112,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .eyebrow{display:inline-block;font-size:12px;letter-spacing:2.4px;text-transform:uppercase;font-weight:bold;color:var(--teal);margin-bottom:18px;}
+  h2{font-size:30px;line-height:1.2;color:var(--navy);font-weight:bold;letter-spacing:-0.4px;}
+  section{padding:74px 0;}
+  .lead{font-size:17px;color:var(--slate);max-width:760px;margin-top:14px;}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* HEADER */
+  header.topbar{background:var(--navy);padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .logo{font-size:18px;font-weight:bold;color:var(--white);letter-spacing:0.5px;}
+  .brand .x{color:var(--teal-bright);font-weight:bold;}
+  .brand .client{color:#C6D5E8;font-size:15px;}
+  .topbar .tag{color:#A7BAD3;font-size:13px;font-style:italic;}
+
+  /* HERO */
+  .hero{background:linear-gradient(150deg,var(--navy-deep) 0%,var(--navy) 52%,var(--navy-soft) 100%);color:var(--white);padding:96px 0 100px;position:relative;overflow:hidden;}
+  .hero:after{content:"";position:absolute;right:-160px;top:-120px;width:520px;height:520px;background:radial-gradient(circle,rgba(31,182,172,0.26),transparent 62%);}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero .eyebrow{color:var(--teal-bright);}
+  .hero h1{font-size:50px;line-height:1.08;font-weight:bold;letter-spacing:-1px;max-width:760px;}
+  .hero h1 .accent{color:var(--teal-bright);}
+  .hero .subline{font-size:19px;color:#D5E1F0;margin-top:22px;max-width:600px;}
+  .hero .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:#0C2B40;font-weight:bold;font-size:15px;padding:14px 26px;border-radius:8px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;}
+  .btn:hover{background:var(--teal-bright);transform:translateY(-2px);box-shadow:0 12px 26px rgba(31,182,172,0.32);}
+  .btn.ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.4);}
+  .btn.ghost:hover{border-color:var(--teal-bright);color:var(--teal-bright);background:transparent;box-shadow:none;}
+  .btn .arrow{font-size:17px;}
+
+  /* STORY */
+  .story{background:var(--white);}
+  .story-copy{max-width:820px;}
+  .story-copy p{font-size:16.5px;color:var(--slate);margin-bottom:18px;}
+  .story-copy p strong{color:var(--ink);}
+  .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;}
+  .theme{background:var(--cloud);border:1px solid var(--line);border-radius:14px;padding:28px 26px;transition:transform .25s ease,box-shadow .25s ease;}
+  .theme:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);}
+  .theme .dot{width:38px;height:38px;border-radius:9px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .theme .dot svg{width:20px;height:20px;stroke:var(--teal);}
+  .theme h3{font-size:17px;color:var(--navy);margin-bottom:9px;}
+  .theme p{font-size:14.5px;color:var(--slate);}
+
+  /* JOURNEY */
+  .journey{background:var(--navy);color:var(--white);}
+  .journey h2{color:var(--white);}
+  .journey .lead{color:#D5E1F0;}
+  .track{position:relative;margin:54px 0 18px;}
+  .track .rail{position:absolute;left:8%;right:8%;top:19px;height:4px;background:linear-gradient(90deg,var(--teal) 0%,rgba(31,182,172,0.5) 38%,rgba(255,255,255,0.22) 70%);border-radius:4px;}
+  .nodes{position:relative;display:grid;grid-template-columns:repeat(4,1fr);}
+  .node{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px;}
+  .node .pip{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;background:var(--navy-soft);border:3px solid rgba(255,255,255,0.3);color:#D5E1F0;position:relative;z-index:2;}
+  .node.now .pip{background:var(--teal);border-color:var(--teal-bright);color:#0C2B40;box-shadow:0 0 0 6px rgba(31,182,172,0.26);}
+  .node.goal .pip{background:var(--white);border-color:var(--white);color:var(--navy);}
+  .node .flag{font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;margin-top:12px;padding:4px 10px;border-radius:30px;}
+  .node.now .flag{background:var(--teal);color:#0C2B40;}
+  .node.goal .flag{background:rgba(255,255,255,0.2);color:var(--white);}
+  .node .stage-name{font-size:16px;font-weight:bold;margin-top:12px;color:var(--white);}
+  .node .stage-desc{font-size:13px;color:#BDCEE4;margin-top:7px;line-height:1.5;}
+  .node .bucket-tag{font-size:11px;color:var(--teal-bright);font-weight:bold;margin-top:9px;letter-spacing:0.3px;}
+
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:54px;}
+  .ba-col{border-radius:16px;padding:30px 28px;border:1px solid rgba(255,255,255,0.14);}
+  .ba-col.today{background:rgba(255,255,255,0.05);}
+  .ba-col.future{background:linear-gradient(155deg,rgba(31,182,172,0.2),rgba(31,182,172,0.06));border-color:rgba(31,182,172,0.45);}
+  .ba-col h3{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:bold;margin-bottom:18px;}
+  .ba-col.today h3{color:#BDCEE4;}
+  .ba-col.future h3{color:var(--teal-bright);}
+  .ba-col .row{padding:13px 0;border-top:1px solid rgba(255,255,255,0.1);font-size:14.5px;color:#E2EAF5;}
+  .ba-col .row:first-of-type{border-top:none;}
+  .ba-col .row b{color:var(--white);}
+
+  /* OUTCOMES */
+  .outcomes{background:var(--cloud);}
+  .out-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;}
+  .out{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px 26px;transition:transform .25s ease,box-shadow .25s ease;}
+  .out:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);}
+  .out .ico{width:42px;height:42px;border-radius:10px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .out .ico svg{width:21px;height:21px;stroke:var(--teal);}
+  .out h3{font-size:16.5px;color:var(--navy);margin-bottom:8px;}
+  .out p{font-size:14.5px;color:var(--slate);}
+
+  /* FINDINGS */
+  .findings{background:var(--white);}
+  .prio-key{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:bold;letter-spacing:0.4px;padding:6px 13px;border-radius:30px;}
+  .chip:before{content:"";width:8px;height:8px;border-radius:50%;}
+  .chip.crit{background:var(--crit-bg);color:var(--crit);} .chip.crit:before{background:var(--crit);}
+  .chip.high{background:var(--high-bg);color:var(--high);} .chip.high:before{background:var(--high);}
+  .chip.med{background:var(--med-bg);color:var(--med);} .chip.med:before{background:var(--med);}
+  .chip.low{background:var(--low-bg);color:var(--low);} .chip.low:before{background:var(--low);}
+
+  .summary-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;}
+  .stat{background:var(--cloud);border:1px solid var(--line);border-radius:12px;padding:20px;text-align:center;}
+  .stat .n{font-size:34px;font-weight:bold;line-height:1;}
+  .stat.crit .n{color:var(--crit);} .stat.high .n{color:var(--high);}
+  .stat.med .n{color:var(--med);} .stat.low .n{color:var(--low);}
+  .stat .t{font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--mist);font-weight:bold;margin-top:7px;}
+
+  .dev-note{font-size:14px;color:var(--slate);margin-top:26px;line-height:1.6;}
+  .dev-tag{font-size:11px;font-weight:bold;letter-spacing:0.3px;padding:4px 10px;border-radius:30px;background:#EEF1F5;color:#5B6B82;border:1px solid #DDE3EC;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+  .dev-tag:before{content:"";width:7px;height:7px;border-radius:2px;background:#5B6B82;}
+
+  /* CRITICAL CALLOUT */
+  .crit-callout{background:linear-gradient(155deg,#FDF4F4,#FBE7E7);border:1px solid #F2C7C7;border-left:5px solid var(--crit);border-radius:16px;padding:30px 30px 26px;margin-top:32px;box-shadow:var(--shadow);}
+  .crit-callout .ch{display:flex;align-items:center;gap:11px;}
+  .crit-callout .ch svg{width:22px;height:22px;stroke:var(--crit);flex:none;}
+  .crit-callout h3{font-size:18px;color:#9A2222;}
+  .crit-callout .sub{font-size:14.5px;color:#9C4A4A;margin:8px 0 20px;}
+  .crit-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .crit-item{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,0.72);border:1px solid #F1D2D2;border-radius:10px;padding:13px 15px;}
+  .crit-item .nidx{flex:none;width:24px;height:24px;border-radius:50%;background:var(--crit);color:#fff;font-size:13px;font-weight:bold;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .crit-item .ci-a{font-size:11px;color:var(--crit);font-weight:bold;text-transform:uppercase;letter-spacing:0.4px;}
+  .crit-item .ci-t{font-size:14px;color:var(--ink);font-weight:bold;line-height:1.35;margin-top:3px;}
+
+  .buckets{margin-top:30px;display:grid;gap:20px;}
+  .bucket{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:30px 30px 18px;box-shadow:var(--shadow);}
+  .bucket-head{display:flex;align-items:center;gap:16px;margin-bottom:6px;}
+  .bucket-num{flex:none;width:42px;height:42px;border-radius:11px;background:var(--navy);color:var(--white);font-weight:bold;font-size:18px;display:flex;align-items:center;justify-content:center;}
+  .bucket-head h3{font-size:19px;color:var(--navy);letter-spacing:-0.2px;}
+
+  .rec{border-top:1px solid var(--line);padding:18px 0 16px;}
+  .rec .rhead{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
+  .rec .rhead .title{flex:1;min-width:200px;font-size:15px;font-weight:bold;color:var(--ink);}
+  .rec .tags{display:flex;gap:8px;flex:none;align-items:center;flex-wrap:wrap;}
+  .rec .desc{font-size:14.5px;color:var(--slate);}
+  details.meta-toggle{margin-top:12px;}
+  details.meta-toggle summary{display:inline-flex;align-items:center;gap:6px;cursor:pointer;list-style:none;font-size:12.5px;font-weight:bold;color:var(--teal);}
+  details.meta-toggle summary::-webkit-details-marker{display:none;}
+  details.meta-toggle summary .chev{width:14px;height:14px;stroke:var(--teal);transition:transform .25s ease;}
+  details.meta-toggle[open] summary .chev{transform:rotate(180deg);}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .badge{font-size:11.5px;font-weight:bold;letter-spacing:0.3px;padding:5px 11px;border-radius:7px;background:var(--cloud);border:1px solid var(--line);color:var(--slate);}
+  .badge b{color:var(--navy);}
+
+  /* WAY FORWARD */
+  .forward{background:var(--cloud);}
+  .fwd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px;}
+  .fwd{border:1px solid var(--line);border-radius:16px;padding:32px 28px;background:var(--white);position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease;}
+  .fwd:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift);}
+  .fwd .top-stripe{position:absolute;top:0;left:0;right:0;height:5px;background:var(--teal);}
+  .fwd .num{font-size:13px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);}
+  .fwd h3{font-size:21px;color:var(--navy);margin:12px 0 6px;}
+  .fwd .when{font-size:13px;color:var(--mist);font-weight:bold;margin-bottom:14px;}
+  .fwd p{font-size:15px;color:var(--slate);}
+
+  /* WHO */
+  .who{background:var(--navy);color:var(--white);}
+  .who h2{color:var(--white);}
+  .who .lead{color:#D5E1F0;}
+  .who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px;}
+  .who-col{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:16px;padding:30px 28px;}
+  .who-col h3{font-size:17px;color:var(--teal-bright);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .who-col h3 svg{width:20px;height:20px;stroke:var(--teal-bright);flex:none;}
+  .who-col ul{list-style:none;}
+  .who-col li{font-size:15px;color:#E2EAF5;padding:11px 0 11px 24px;position:relative;border-top:1px solid rgba(255,255,255,0.1);}
+  .who-col li:first-child{border-top:none;}
+  .who-col li:before{content:"";position:absolute;left:2px;top:18px;width:7px;height:7px;border-radius:50%;background:var(--teal-bright);}
+  .who-close{margin-top:34px;font-size:16px;color:#D5E1F0;text-align:center;max-width:780px;margin-left:auto;margin-right:auto;}
+
+  /* NEXT */
+  .next{background:var(--teal-soft);text-align:center;}
+  .next h2{color:var(--navy);}
+  .next p{font-size:17px;color:var(--slate);max-width:620px;margin:16px auto 0;}
+  .next .cta-row{justify-content:center;margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;}
+  .next .btn{background:var(--navy);color:var(--white);}
+  .next .btn:hover{background:var(--navy-soft);box-shadow:0 12px 26px rgba(43,72,112,0.28);}
+
+  /* FOOTER */
+  footer{background:var(--navy-deep);color:#BDCEE4;padding:46px 0;font-size:14px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:22px;}
+  footer .f-name{color:var(--white);font-weight:bold;font-size:16px;}
+  footer .f-role{color:#A7BAD3;margin-top:3px;}
+  footer a{color:var(--teal-bright);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+  footer .f-right{text-align:right;}
+
+  @media(max-width:860px){
+    .themes,.out-grid{grid-template-columns:1fr;}
+    .ba{grid-template-columns:1fr;}
+    .crit-list{grid-template-columns:1fr;}
+    .nodes{grid-template-columns:1fr;gap:26px;}
+    .track .rail{display:none;}
+    .node{flex-direction:row;text-align:left;gap:16px;align-items:flex-start;}
+    .node .pip{flex:none;}
+    .summary-stats{grid-template-columns:repeat(2,1fr);}
+    .fwd-grid,.who-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:36px;}
+    h2{font-size:25px;}
+    section{padding:54px 0;}
+    .hero{padding:70px 0 74px;}
+    footer .wrap{flex-direction:column;}
+    footer .f-right{text-align:left;}
+  }
+  @media(max-width:480px){.wrap{padding:0 20px;}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo">BBD Boom</span>
+      <span class="x">&times;</span>
+      <span class="client">Kenwood Travel</span>
+    </div>
+    <span class="tag">HubSpot Elite Solutions Partner, Siloy Group</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">BBD Boom &times; Kenwood Travel</span>
+    <h1>A solid start. <span class="accent">Now time to drive revenue.</span></h1>
+    <p class="subline">Your HubSpot audit, summarised, and a clear way forward.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">The story so far</span>
+      <h2>A strong foundation, with most of the value still to come.</h2>
+    </div>
+    <div class="story-copy reveal">
+      <p>Kenwood has invested well in HubSpot. Three premium hubs (Marketing Hub Enterprise, Sales Hub Professional and Service Hub Professional), a sensible data structure, and a working iVector integration. The foundation is strong.</p>
+      <p>The audit also makes clear there is more to do. The platform is configured but not yet activated, and because a few key steps still run outside HubSpot, some reports currently mislead rather than inform. None of that is a reflection on the team. It is a setup that was stood up quickly and never fully switched on. The encouraging part: <strong>the gap is activation, not capability</strong>. Almost every fix is something you already own the licence for. This is about switching on and tuning what you have, not rebuilding it.</p>
+    </div>
+
+    <div class="themes">
+      <div class="theme reveal">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
+        <h3>Conversions are invisible</h3>
+        <p>The quoting iframe was a sensible quick workaround, but it means bookings convert outside HubSpot's view, so marketing cannot yet act on what converts.</p>
+      </div>
+      <div class="theme reveal">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Lead handling is manual</h3>
+        <p>Routing, availability logic and an SLA were never built, so today the speed of a reply depends on who picks it up rather than on the system.</p>
+      </div>
+      <div class="theme reveal">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></div>
+        <h3>The data is not yet trustworthy</h3>
+        <p>There was never one agreed way to tag sources, so regional conversion, source conversion and speed to quote do not yet hold up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Where you are, and where we're going</span>
+      <h2>From a platform you own to one you have mastered.</h2>
+      <p class="lead">Kenwood is configured but not yet activated. Here is the journey ahead, and how each stage builds on the last.</p>
+    </div>
+
+    <div class="track reveal">
+      <div class="rail"></div>
+      <div class="nodes">
+        <div class="node now">
+          <div class="pip">1</div>
+          <span class="flag">You are here</span>
+          <span class="stage-name">Configured</span>
+          <span class="stage-desc">Premium licences bought, structure in place. Data and automation not yet switched on.</span>
+        </div>
+        <div class="node">
+          <div class="pip">2</div>
+          <span class="stage-name">Activated</span>
+          <span class="stage-desc">Leads routed fast, sources clean, conversions visible. A foundation you can trust.</span>
+          <span class="bucket-tag">Quick wins</span>
+        </div>
+        <div class="node">
+          <div class="pip">3</div>
+          <span class="stage-name">Optimised</span>
+          <span class="stage-desc">Automation, segmentation, reporting and the integration working together.</span>
+          <span class="bucket-tag">Strategic projects</span>
+        </div>
+        <div class="node goal">
+          <div class="pip">4</div>
+          <span class="flag">The goal</span>
+          <span class="stage-name">Mastery</span>
+          <span class="stage-desc">Continuous improvement across alignment, adoption, activation and AI.</span>
+          <span class="bucket-tag">Ongoing partnership</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="outcomes">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">The outcomes you want</span>
+      <h2>What good looks like for Kenwood.</h2>
+      <p class="lead">Everything below maps back to these six outcomes. They are the reason the work matters.</p>
+    </div>
+    <div class="out-grid">
+      <div class="out reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3>Leads answered fast, every time</h3>
+        <p>The right agent, a clear response SLA, and no enquiry left waiting because someone was busy.</p>
+      </div>
+      <div class="out reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Conversion you can actually see</h3>
+        <p>Clean sources so regional conversion, source conversion and speed to quote can finally be trusted.</p>
+      </div>
+      <div class="out reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7"/><rect x="12" y="6" width="3" height="11"/><rect x="17" y="13" width="3" height="4"/></svg></div>
+        <h3>A pipeline leadership can forecast</h3>
+        <p>Stages that reflect reality in real time, and one SLT dashboard the leadership team can rely on.</p>
+      </div>
+      <div class="out reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div>
+        <h3>Marketing that knows each customer</h3>
+        <p>Value tiers and content personalised by destination and history, not one newsletter for everyone.</p>
+      </div>
+      <div class="out reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <h3>More value from every booking</h3>
+        <p>Upsell, repeat bookings and loyalty, built on a proper view of each customer's lifetime value.</p>
+      </div>
+      <div class="out reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>A team that lives in HubSpot</h3>
+        <p>One clear daily workflow, calls logged, and an internal champion who keeps it all on track.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINDINGS -->
+<section class="findings">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">What the audit found</span>
+      <h2>Everything the audit recommended, grouped as the audit grouped it.</h2>
+      <p class="lead">Forty-two recommendations across eleven areas. The priority tags show where to start, so the urgent items stand out.</p>
+      <div class="prio-key">
+        <span class="chip crit">Critical</span>
+        <span class="chip high">High</span>
+        <span class="chip med">Medium</span>
+        <span class="chip low">Low</span>
+      </div>
+      <div class="summary-stats">
+        <div class="stat crit"><div class="n">7</div><div class="t">Critical</div></div>
+        <div class="stat high"><div class="n">20</div><div class="t">High</div></div>
+        <div class="stat med"><div class="n">12</div><div class="t">Medium</div></div>
+        <div class="stat low"><div class="n">3</div><div class="t">Low</div></div>
+      </div>
+      <p class="dev-note">Most fixes are activation you already own the licence for. The seven items marked <span class="dev-tag">Needs development</span> need your developer on the iVector, Lambda or CMS side, and they cluster in the integration area. Open the toggle on any recommendation for its effort, impact and hub.</p>
+    </div>
+
+    <!-- CRITICAL CALLOUT -->
+    <div class="crit-callout reveal">
+      <div class="ch">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <h3>Start here: the seven critical fixes</h3>
+      </div>
+      <p class="sub">If nothing else moves first, these seven do. They are the items holding back lead speed, conversion visibility and trustworthy data.</p>
+      <div class="crit-list">
+        <div class="crit-item"><div class="nidx">1</div><div><div class="ci-a">Lead routing</div><div class="ci-t">Rota-based lead assignment workflow</div></div></div>
+        <div class="crit-item"><div class="nidx">2</div><div><div class="ci-a">Lead routing</div><div class="ci-t">Lead response SLA monitoring</div></div></div>
+        <div class="crit-item"><div class="nidx">3</div><div><div class="ci-a">Automation</div><div class="ci-t">End-to-end enquiry nurture workflow</div></div></div>
+        <div class="crit-item"><div class="nidx">4</div><div><div class="ci-a">Attribution</div><div class="ci-t">Lead source taxonomy</div></div></div>
+        <div class="crit-item"><div class="nidx">5</div><div><div class="ci-a">Attribution</div><div class="ci-t">Mandate call logging via HubSpot and Zoom</div></div></div>
+        <div class="crit-item"><div class="nidx">6</div><div><div class="ci-a">Sales pipeline</div><div class="ci-t">Automate booking flow stage progression</div></div></div>
+        <div class="crit-item"><div class="nidx">7</div><div><div class="ci-a">Integration</div><div class="ci-t">Replace the CMS iframe with a native quote integration</div></div></div>
+      </div>
+    </div>
+
+    <div class="buckets">
+
+      <!-- 1 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">1</div><h3>Data architecture and custom objects</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Data governance framework</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Conduct a full property audit to remove duplicates and establish a naming convention. Define which system is the source of truth for each data type, and create a data dictionary shared with the dev team.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> All Hubs</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Booking amendment sync</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip high">High</span></span></div>
+          <p class="desc">Extend the Lambda and CMS API integration to fire on booking amendments, upsells and cancellations, not just initial creation. This is a prerequisite to accurate revenue reporting.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> High (Dev)</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Lost Reason property and workflow</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Create a standardised Lost Reason property on the Booking Flow object. Require this field before a record can move to Non-Converted, and feed it into a reporting dashboard for win and loss analysis.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Contact deduplication rules</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Configure HubSpot's native deduplication tools, or a regular merge workflow, to catch likely duplicates. Define unique identifiers (email plus phone) and give the team a process to review and merge flagged records.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> All Hubs</span></div></details>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">2</div><h3>Contact and lifecycle management</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Customise lifecycle stages and automate progression</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Align the default lifecycle stages with your process (Enquiry created to Lead, Quote sent to Marketing Qualified Lead, Booking confirmed to Customer). Build workflows that update the contact stage automatically from the Booking Flow pipeline, so reporting cohorts are accurate.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Build an RFM scoring model</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Use Marketing Hub Enterprise custom scoring to build a Recency, Frequency, Monetary score from booking history synced via iVector. Segment contacts into tiers (Platinum, Gold, Silver, Lapsed) for targeted marketing.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Create segmented active lists</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Build active lists for the segments that matter: first-time enquirers, repeat bookers, high-value customers, lapsed (12 months plus), and destination-specific (Caribbean, Indian Ocean). These become the foundation for all email marketing.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Re-engagement workflow for lapsed contacts</span><span class="tags"><span class="chip low">Low</span></span></div>
+          <p class="desc">Create a 6-month and 12-month re-engagement sequence for contacts with no booking activity. Use dynamic content to personalise by last destination or travel preference.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">3</div><h3>Sales pipeline and booking flow</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Automate booking flow stage progression triggers</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip crit">Critical</span></span></div>
+          <p class="desc">Configure workflow triggers to move booking flows automatically (quote sent moves to Quote Sent, booking confirmed in iVector moves to Booking Confirmed). This removes the reliance on manual updates that makes the pipeline unreliable.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium (Dev for iVector triggers)</span><span class="badge"><b>Impact:</b> Critical</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Build quote follow-up sequences (five touches)</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Use Sales Hub Professional Sequences to build a five-touch cadence on open quotes (Day 1, 3, 7, 14, 21), with templates personalised by destination type. Enrol booking flows automatically when they enter Quote Sent.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">4</div><h3>Lead assignment and routing</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Build a rota-based lead assignment workflow</span><span class="tags"><span class="chip crit">Critical</span></span></div>
+          <p class="desc">Create a workflow using rotating (round-robin) assignment, mapping agent availability windows to assignment rules. This needs the rota held as a HubSpot property or fed from a scheduling tool. Assign by team where full rota integration is not immediately feasible.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> High</span><span class="badge"><b>Impact:</b> Critical</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Implement lead response SLA monitoring</span><span class="tags"><span class="chip crit">Critical</span></span></div>
+          <p class="desc">Configure SLA properties on the Enquiry pipeline with target first-response times (for example 2 hours for web enquiries, 4 hours for self-quotes). A workflow creates an escalation task and notifies a manager when the SLA is breached.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Destination-based routing rules</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Where agents specialise by destination (Caribbean, Indian Ocean, African Safari), build conditional routing that assigns enquiries on the destination field captured in the web form. This improves first-contact quality and conversion.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Zoom and HubSpot login compliance dashboard</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Build a daily team activity report showing who is logged in and active in HubSpot, used as a morning check for managers. Combine with Zoom integration status monitoring.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">5</div><h3>Automation and workflows</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Build an end-to-end enquiry nurture workflow</span><span class="tags"><span class="chip crit">Critical</span></span></div>
+          <p class="desc">On a new Enquiry Booking Flow: assign to an agent, create a "Contact within 2 hours" task, send an acknowledgement email to the customer, and escalate to a manager if there is no activity after 4 hours. This single workflow tackles the most common complaint about lead quality in travel CRMs.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> Critical</span><span class="badge"><b>Hub:</b> Sales Hub Pro and Marketing Hub</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Post-booking communications workflow</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">When a Booking Flow reaches Booking Confirmed: send a confirmation (Day 0), a pre-travel checklist (8 weeks before departure), a final countdown (2 weeks before) and a post-travel NPS survey (7 days after return). All automatable within the existing hubs.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Abandoned booking recovery workflow</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip high">High</span></span></div>
+          <p class="desc">Using iVector data on incomplete booking attempts, create HubSpot contacts and enrol them in a three-touch email sequence within 24 hours.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> High (Dev)</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise and Dev</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Upsell automation post-booking</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Six weeks before departure, send a personalised email offering travel insurance, room upgrades, excursions or transfers based on booking type, using dynamic content to personalise by destination.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">6</div><h3>Attribution and source tracking</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Define and implement a lead source taxonomy</span><span class="tags"><span class="chip crit">Critical</span></span></div>
+          <p class="desc">Set the Booking Source property to a defined list (Web Enquiry Form, Web Self-Quote, Inbound Phone Call, Outbound Call, iVector Import, CMS Admin Entry, Referral, Repeat Customer) and auto-populate it from the originating trigger. This is the foundational fix that unblocks all reporting.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> Critical</span><span class="badge"><b>Hub:</b> All Hubs</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Mandate call logging via HubSpot and Zoom</span><span class="tags"><span class="chip crit">Critical</span></span></div>
+          <p class="desc">Set a policy, backed by a workflow alert, that all calls are logged in HubSpot. Configure the Zoom integration to auto-log call disposition, and run a daily report of calls logged by agent for weekly team meetings.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Critical</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">UTM parameter standardisation</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Audit and standardise UTM parameters across every channel (email, paid, organic, social) using HubSpot's tracking URL builder. Clean historical data where possible and configure attribution reports once the UTMs are reliable.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Configure multi-touch attribution reporting</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Enable HubSpot's multi-touch attribution in Marketing Hub Enterprise and build a report showing first-touch, last-touch and linear attribution for bookings, to separate what drives top-of-funnel from what drives conversion.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">7</div><h3>Email and marketing automation</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Implement dynamic email content</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Use dynamic content to personalise email blocks by contact property: last destination booked, travel preferences, lifecycle stage and RFM tier. A customer who has booked the Caribbean twice should never receive a generic "discover our destinations" email.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Build destination-based nurture streams</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Create separate nurture tracks for the top destination categories (Caribbean, Indian Ocean, Africa, Far East). Trigger on the enquiry destination property and keep segment membership current with active lists.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Configure predictive lead scoring</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Use Marketing Hub Enterprise predictive lead scoring to rank contacts by likelihood to book, feed the score into agent views so they prioritise outreach, and train agents on how to read and act on it.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Pre-travel and post-travel content programme</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Build a structured content programme: pre-travel (destination guides, packing tips, itinerary teasers) and post-travel (review requests, "where next" inspiration, loyalty). These drive both NPS and repeat bookings.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Marketing Hub Enterprise</span></div></details>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">8</div><h3>Reporting and dashboards</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Build an SLT executive dashboard</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">A dashboard for senior leadership covering enquiries by source, enquiry-to-quote conversion by source, quote-to-booking conversion by agent, revenue in pipeline by stage, average speed to first contact, and bookings confirmed this month versus target.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> All Hubs</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Speed-to-quote and speed-to-contact reports</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Use booking flow create date versus stage-change date to measure time from enquiry to first agent activity, and time from first contact to quote sent. Show average and distribution, and flag outliers. A direct lever on conversion.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Agent performance league table</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">A Sales Hub report by agent: enquiries assigned, quotes sent, bookings confirmed, close rate, average booking value and open pipeline. Reviewed weekly to drive accountability and surface coaching needs.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Regional conversion funnel report</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Once the destination property is consistently populated, build a funnel of enquiry to quote to booking by region. It shows where destinations lose leads and informs both sales coaching and marketing investment.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> All Hubs</span></div></details>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">9</div><h3>Technical integration (iVector and CMS)</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Replace the CMS iframe with a native quote integration</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip crit">Critical</span></span></div>
+          <p class="desc">The long-term fix is a native HubSpot quote record (or Booking Flow property update) created when a quote is generated in iVector or the CMS, so workflows can trigger on quote events. Scoped as a dev project across the in-house developer, Brindha (BA) and a HubSpot specialist.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> High (Dev)</span><span class="badge"><b>Impact:</b> Critical</span><span class="badge"><b>Hub:</b> Sales Hub Pro and Dev</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Extend the Lambda to handle booking amendments</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip high">High</span></span></div>
+          <p class="desc">Modify the AWS Lambda (kt-ivector-booking) to fire on iVector amendment events, not just initial creation, so post-booking changes (passenger updates, room upgrades, cancellations, cost changes) are reflected in HubSpot.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> High (Dev)</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Dev and Sales Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Implement integration error monitoring</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip high">High</span></span></div>
+          <p class="desc">Add a monitoring layer to the Lambda that logs failures to a HubSpot property or sends an alert (email or Slack) when the CMS API call fails. This prevents records silently going stale.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium (Dev)</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Dev</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Duplicate contact prevention in the integration code</span><span class="tags"><span class="dev-tag">Needs development</span><span class="chip med">Medium</span></span></div>
+          <p class="desc">Review the TypeScript class used for enquiry, quote and booking creation so it checks for an existing contact by email first, with merge-or-update logic to stop duplicates proliferating from multi-source entry.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium (Dev)</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Dev</span></div></details>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">10</div><h3>Service Hub and ticketing</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Launch a post-trip NPS programme</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Configure the native NPS survey to send automatically 7 days after the return date (synced from the booking record), and track NPS by destination, departure month and booking agent. This directly informs product and service decisions.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Medium</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Service Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Configure ticket SLAs and escalation workflows</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Set SLA targets for first response (for example 4 hours) and resolution (for example 48 hours), with escalation workflows that notify a senior agent or manager on breach, plus a daily SLA compliance report.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Service Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Connect tickets to booking records</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">Associate every support ticket with the relevant Booking Flow record, and add a "Number of Support Tickets" property on the Booking object to feed agent performance and product-quality reporting.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Service Hub Pro</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Activate the customer portal</span><span class="tags"><span class="chip low">Low</span></span></div>
+          <p class="desc">Enable the HubSpot Customer Portal so customers can submit and track their own support tickets. This reduces inbound volume for status queries and improves the customer experience.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Service Hub Pro</span></div></details>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="bucket reveal">
+        <div class="bucket-head"><div class="bucket-num">11</div><h3>User adoption and enablement</h3></div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Clarify the definitive agent workflow (HubSpot versus Outlook)</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Produce a one-page Agent Daily Workflow that states clearly where to log calls, where to manage enquiries, how to handle email (HubSpot versus Outlook), and what to do at the start and end of day. Present it in a team meeting and pin it in the shared drive.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Process and Training</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Upskill Brindha as the internal HubSpot champion</span><span class="tags"><span class="chip high">High</span></span></div>
+          <p class="desc">Invest in formal HubSpot training for Brindha (Sales Hub, Marketing Hub and admin basics) so she becomes the internal go-between for requirements, user support, QA testing and dev-to-business translation. The highest-ROI training investment available.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> High</span><span class="badge"><b>Hub:</b> Training</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Weekly HubSpot health check for managers</span><span class="tags"><span class="chip med">Medium</span></span></div>
+          <p class="desc">A Data Quality dashboard managers review every Monday: booking flows with no owner, no activity in 7 days, contacts with no lifecycle stage, and open enquiries older than 5 days. This makes data hygiene a management habit.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> All Hubs</span></div></details>
+        </div>
+        <div class="rec">
+          <div class="rhead"><span class="title">Train internal IT on HubSpot basics</span><span class="tags"><span class="chip low">Low</span></span></div>
+          <p class="desc">Run a half-day session for IT covering user management, Outlook and Zoom integration troubleshooting, basic workflow management and escalation paths, creating internal first-line support capacity.</p>
+          <details class="meta-toggle"><summary>Effort, impact and hub <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></summary><div class="meta"><span class="badge"><b>Effort:</b> Low</span><span class="badge"><b>Impact:</b> Medium</span><span class="badge"><b>Hub:</b> Training</span></div></details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAY FORWARD -->
+<section class="forward" id="forward">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">The way forward</span>
+      <h2>Three simple buckets, so you see value at every step.</h2>
+      <p class="lead">We group this work so you never run before you can walk, and so each step earns the right to the next.</p>
+    </div>
+    <div class="fwd-grid">
+      <div class="fwd reveal">
+        <div class="top-stripe"></div>
+        <div class="num">Bucket one</div>
+        <h3>Quick wins</h3>
+        <div class="when">4 to 8 weeks</div>
+        <p>The clear, high-confidence fixes that need little scoping: get leads to the right agent fast, clean up sources and lifecycle, and make conversions visible. A foundation you can trust, quickly.</p>
+      </div>
+      <div class="fwd reveal">
+        <div class="top-stripe"></div>
+        <div class="num">Bucket two</div>
+        <h3>Strategic projects</h3>
+        <div class="when">2 to 3 months each</div>
+        <p>The bigger builds, scoped one at a time: the native booking integration, sales automation, marketing segmentation and loyalty, reporting, and Service Hub.</p>
+      </div>
+      <div class="fwd reveal">
+        <div class="top-stripe"></div>
+        <div class="num">Bucket three</div>
+        <h3>Ongoing partnership</h3>
+        <div class="when">Continuous</div>
+        <p>Continuous activation, adoption, alignment and AI to keep improving towards mastery, plus the day-to-day support and the strategic scoping resource you asked for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO DOES WHAT -->
+<section class="who">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Who does what</span>
+      <h2>A fair, simple way to decide who builds each piece.</h2>
+      <p class="lead">So you get the best result and keep capability in-house where it makes sense.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-col reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Best with BBD Boom</h3>
+        <ul>
+          <li>HubSpot configuration</li>
+          <li>Automation and workflows</li>
+          <li>Reporting and dashboards</li>
+          <li>Integration design and orchestration</li>
+          <li>AI setup</li>
+        </ul>
+      </div>
+      <div class="who-col reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Best with your developer</h3>
+        <ul>
+          <li>Changes on the iVector, Lambda and CMS side</li>
+          <li>Pushing booking and conversion data into HubSpot to our specification</li>
+        </ul>
+      </div>
+      <div class="who-col reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Decided together</h3>
+        <ul>
+          <li>The build approach for the native quote integration</li>
+          <li>Anything that touches both sides at once</li>
+        </ul>
+      </div>
+    </div>
+    <p class="who-close">For each strategic project we agree who builds what in a short scoping step, based on what delivers the best result fastest.</p>
+  </div>
+</section>
+
+<!-- NEXT STEP -->
+<section class="next">
+  <div class="wrap reveal">
+    <span class="eyebrow">Next step</span>
+    <h2>A detailed proposal follows, with scope and pricing.</h2>
+    <p>It covers the quick wins and the first strategic project, so you can see exactly what it takes to start driving revenue.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="f-left">
+      <div class="f-name">Adam Lewis</div>
+      <div class="f-role">Commercial Director, BBD Boom</div>
+      <div class="f-role">HubSpot Elite Solutions Partner, Siloy Group</div>
+    </div>
+    <div class="f-right">
+      <div><a href="mailto:adam@bbdboom.com">adam@bbdboom.com</a></div>
+      <div><a href="https://www.bbdboom.com" target="_blank" rel="noopener">www.bbdboom.com</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:0.12});
+    els.forEach(function(e){io.observe(e);});
+  })();
+</script>
+
+</body>
+</html>
