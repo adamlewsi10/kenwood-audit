@@ -229,6 +229,45 @@
     footer .f-right{text-align:left;}
   }
   @media(max-width:480px){.wrap{padding:0 20px;}}
+  /* PARTNERSHIP ADDITIONS */
+  .fwd-grid.pair{grid-template-columns:repeat(2,1fr);max-width:760px;margin-left:auto;margin-right:auto;}
+  .fwd .price{font-size:30px;color:var(--navy);font-weight:bold;margin:12px 0 4px;letter-spacing:-0.5px;}
+  .fwd .price .per{font-size:14px;color:var(--mist);font-weight:normal;letter-spacing:0;}
+  .proj-panel{border:1px solid var(--line);border-radius:16px;padding:30px 30px;background:var(--cloud);margin-top:30px;}
+  .proj-panel h3{font-size:19px;color:var(--navy);margin-bottom:6px;}
+  .proj-panel .sub{font-size:14.5px;color:var(--slate);margin-bottom:20px;}
+  .proj-list{display:grid;grid-template-columns:repeat(2,1fr);gap:15px 32px;}
+  .proj-list .item{position:relative;padding-left:26px;font-size:15px;color:var(--slate);line-height:1.5;}
+  .proj-list .item strong{color:var(--navy);}
+  .proj-list .item:before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--teal);}
+  .proj-panel.scoped{background:var(--white);border-left:5px solid var(--navy);}
+  .proj-panel.scoped .item:before{background:var(--navy);}
+  .scoped-chip{display:inline-block;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:bold;color:var(--navy);background:var(--cloud);border:1px solid var(--line);border-radius:20px;padding:5px 13px;margin-bottom:14px;}
+
+  /* MONTHLY FLOW */
+  .flow{background:var(--cloud);}
+  .flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:46px;}
+  .flow-step{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:28px 24px;}
+  .flow-step .step-n{width:38px;height:38px;border-radius:50%;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;margin-bottom:16px;}
+  .flow-step h3{font-size:17px;color:var(--navy);margin-bottom:8px;}
+  .flow-step p{font-size:14.5px;color:var(--slate);}
+  .flow-note{font-size:15px;color:var(--slate);margin-top:28px;max-width:840px;}
+  .flow-note strong{color:var(--navy);}
+
+  /* WHERE THIS GOES NEXT (AI) */
+  .ai-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:46px;}
+  .ai-tile{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white);transition:transform .25s ease,box-shadow .25s ease;}
+  .ai-tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);}
+  .ai-shot{aspect-ratio:16/10;background:linear-gradient(140deg,var(--cloud),#E7EFF8);display:block;overflow:hidden;border-bottom:1px solid var(--line);}
+  .ai-shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block;}
+  .ai-cap{padding:16px 18px;}
+  .ai-cap h3{font-size:15.5px;color:var(--navy);margin-bottom:6px;}
+  .ai-cap p{font-size:13.5px;color:var(--slate);}
+  .ai-foot{font-size:14px;color:var(--mist);margin-top:26px;text-align:center;font-style:italic;}
+
+  @media(max-width:980px){.ai-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:880px){.flow-grid{grid-template-columns:repeat(2,1fr);}.fwd-grid.pair{grid-template-columns:1fr;}.proj-list{grid-template-columns:1fr;}}
+  @media(max-width:560px){.flow-grid,.ai-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -308,7 +347,7 @@
           <div class="pip">2</div>
           <span class="stage-name">Activated</span>
           <span class="stage-desc">Leads routed fast, sources clean, conversions visible. A foundation you can trust.</span>
-          <span class="bucket-tag">Quick wins</span>
+          <span class="bucket-tag">Foundation fixes</span>
         </div>
         <div class="node">
           <div class="pip">3</div>
@@ -321,10 +360,44 @@
           <span class="flag">The goal</span>
           <span class="stage-name">Mastery</span>
           <span class="stage-desc">Continuous improvement across alignment, adoption, activation and AI.</span>
-          <span class="bucket-tag">Ongoing partnership</span>
+          <span class="bucket-tag">Strategic partnership</span>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- WHERE THIS GOES NEXT -->
+<section class="whatsnext">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Where we go next</span>
+      <h2>From mastery, the platform starts working for you.</h2>
+      <p class="lead">As you move along that journey, this is where it leads: HubSpot's AI agents and new channels doing the routine work, so your team can focus on selling. It builds on the foundation, not on day one.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-tile reveal">
+        <div class="ai-shot"><img src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Knowledge_Base_2023-24-25/KB-Customer-agent/customer-agent-set-up-the-agent.png?width=481&height=338&name=customer-agent-set-up-the-agent.png" alt="HubSpot Customer Agent setup screen" loading="lazy"></div>
+        <div class="ai-cap"><h3>Customer agent</h3><p>Answers routine booking and status questions, day and night.</p></div>
+      </div>
+      <div class="ai-tile reveal">
+        <div class="ai-shot"><img src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Knowledge_Base_2023_2024/generate-sales-emails.png?width=450&height=399&name=generate-sales-emails.png" alt="HubSpot Content Agent generating sales emails" loading="lazy"></div>
+        <div class="ai-cap"><h3>Content agent</h3><p>Drafts emails, landing pages and campaigns in your voice.</p></div>
+      </div>
+      <div class="ai-tile reveal">
+        <div class="ai-shot"><img src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Knowledge_Base_2023-24-25/KB-Workflows/workflows-breeze-data-agent-custom-prompt.png?width=610&height=429&name=workflows-breeze-data-agent-custom-prompt.png" alt="HubSpot Breeze Data Agent configuration" loading="lazy"></div>
+        <div class="ai-cap"><h3>Data agent</h3><p>Keeps records clean and enriched, fixing data at the source.</p></div>
+      </div>
+      <div class="ai-tile reveal">
+        <div class="ai-shot"><img src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Knowledge_Base_2023-24-25/KB-Lead-scoring/ai-contact-engagement-score.png?width=660&height=371&name=ai-contact-engagement-score.png" alt="HubSpot AI predictive lead scoring" loading="lazy"></div>
+        <div class="ai-cap"><h3>Predictive lead scoring</h3><p>Focuses agents on the enquiries most likely to book.</p></div>
+      </div>
+      <div class="ai-tile reveal">
+        <div class="ai-shot"><img src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/Knowledge_Base_2023-24-25/KB-inbox/inbox-send-a-wa-message.png?width=600&height=338&name=inbox-send-a-wa-message.png" alt="HubSpot WhatsApp message in conversations inbox" loading="lazy"></div>
+        <div class="ai-cap"><h3>New channels</h3><p>WhatsApp and live chat, meeting customers where they are.</p></div>
+      </div>
+    </div>
+    <p class="ai-foot reveal">Screenshots are illustrative of HubSpot capability, added as we activate each feature.</p>
   </div>
 </section>
 
@@ -687,32 +760,86 @@
   <div class="wrap">
     <div class="reveal">
       <span class="eyebrow">The way forward</span>
-      <h2>Three simple buckets, so you see value at every step.</h2>
-      <p class="lead">We group this work so you never run before you can walk, and so each step earns the right to the next.</p>
+      <h2>An ongoing partnership that drives the work, month after month.</h2>
+      <p class="lead">Rather than a one-off project, the right model is a strategic partnership that keeps moving Kenwood forward, with the right specialist on each piece.</p>
     </div>
-    <div class="fwd-grid">
+    <div class="fwd-grid pair">
       <div class="fwd reveal">
         <div class="top-stripe"></div>
-        <div class="num">Bucket one</div>
-        <h3>Quick wins</h3>
-        <div class="when">4 to 8 weeks</div>
-        <p>The clear, high-confidence fixes that need little scoping: get leads to the right agent fast, clean up sources and lifecycle, and make conversions visible. A foundation you can trust, quickly.</p>
+        <div class="num">Strategic partnership</div>
+        <div class="price">&pound;5,000 <span class="per">per month</span></div>
+        <div class="when">Includes dev work</div>
+        <p>A domain-led retainer that keeps Kenwood moving: prioritising the work, configuring and automating HubSpot, and delivering a rolling programme of strategic projects. Led by Katie as your domain expert, so you are no longer the one turning business goals into technical briefs. The most urgent fixes come first.</p>
       </div>
       <div class="fwd reveal">
         <div class="top-stripe"></div>
-        <div class="num">Bucket two</div>
-        <h3>Strategic projects</h3>
-        <div class="when">2 to 3 months each</div>
-        <p>The bigger builds, scoped one at a time: the native booking integration, sales automation, marketing segmentation and loyalty, reporting, and Service Hub.</p>
-      </div>
-      <div class="fwd reveal">
-        <div class="top-stripe"></div>
-        <div class="num">Bucket three</div>
-        <h3>Ongoing partnership</h3>
-        <div class="when">Continuous</div>
-        <p>Continuous activation, adoption, alignment and AI to keep improving towards mastery, plus the day-to-day support and the strategic scoping resource you asked for.</p>
+        <div class="num">Ongoing support</div>
+        <div class="price">&pound;600 <span class="per">per month</span></div>
+        <div class="when">Day-to-day help</div>
+        <p>A dedicated support team for logins, how-tos and small fixes, so your marketing lead is freed from acting as the internal helpdesk.</p>
       </div>
     </div>
+
+    <div class="proj-panel reveal">
+      <h3>Strategic projects, delivered through the partnership</h3>
+      <p class="sub">Prioritised with you and delivered as a rolling programme, not a list of separately priced phases.</p>
+      <div class="proj-list">
+        <div class="item"><strong>Lead routing and SLAs.</strong> Every enquiry to the right agent, fast.</div>
+        <div class="item"><strong>Source, attribution and call logging.</strong> Numbers you can trust.</div>
+        <div class="item"><strong>Pipeline automation.</strong> Stage triggers and quote follow-ups, so fewer quotes go cold.</div>
+        <div class="item"><strong>Segmentation and lifecycle marketing.</strong> RFM and value tiers for more repeat bookers.</div>
+        <div class="item"><strong>Reporting and dashboards.</strong> One reliable view for leadership and agents.</div>
+        <div class="item"><strong>Service Hub activation.</strong> NPS, ticket SLAs and the customer portal.</div>
+        <div class="item"><strong>AI activation.</strong> Breeze agent, AI assistants, predictive scoring and new channels.</div>
+        <div class="item"><strong>Data governance baseline.</strong> Naming, dedup and field rules kept healthy throughout.</div>
+      </div>
+    </div>
+
+    <div class="proj-panel scoped reveal">
+      <span class="scoped-chip">Scoped separately, outside the retainer</span>
+      <h3>Major custom development against external systems</h3>
+      <p class="sub">The bigger builds need a dedicated dev and data team, so they are scoped and priced on their own.</p>
+      <div class="proj-list">
+        <div class="item"><strong>Full two-way iVector integration.</strong> Replacing the iframe, Lambda amendments and error monitoring. The headline example, weighed against your plan to replace iVector in around two years.</div>
+        <div class="item"><strong>A future booking-system integration.</strong> Connecting your proprietary platform to HubSpot when you build it.</div>
+        <div class="item"><strong>Other heavy custom development.</strong> Bespoke code, or integrating another external system.</div>
+        <div class="item"><strong>Large one-off data migration.</strong> Bulk remediation beyond the governance baseline, often with a third-party tool.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK EACH MONTH -->
+<section class="flow">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">How the partnership works</span>
+      <h2>You set the priorities. We work through them.</h2>
+      <p class="lead">Every month follows the same simple rhythm, so you always know what is being worked on and why.</p>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-step reveal">
+        <div class="step-n">1</div>
+        <h3>Prioritise</h3>
+        <p>At the start of each month, you and Katie agree the priorities from a shared backlog, ranked by commercial impact. You decide what matters most.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-n">2</div>
+        <h3>Plan</h3>
+        <p>We turn the agreed priorities into a clear plan of work for the month, with owners and timings, tracked in Teamwork.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-n">3</div>
+        <h3>Deliver</h3>
+        <p>The team works through the tasks, configuring, automating and building, and keeps you updated as each piece goes live.</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="step-n">4</div>
+        <h3>Review</h3>
+        <p>At month end we review what was delivered and its impact, then reset the priorities for the next month.</p>
+      </div>
+    </div>
+    <p class="flow-note reveal"><strong>Bigger strategic projects</strong> are sequenced across several months within the same rhythm. <strong>Day-to-day issues</strong> go to the support team in parallel, so they never crowd out the strategic work.</p>
   </div>
 </section>
 
@@ -721,36 +848,38 @@
   <div class="wrap">
     <div class="reveal">
       <span class="eyebrow">Who does what</span>
-      <h2>A fair, simple way to decide who builds each piece.</h2>
-      <p class="lead">So you get the best result and keep capability in-house where it makes sense.</p>
+      <h2>Your team, and where the resource goes.</h2>
+      <p class="lead">You asked how our team and dev resource compare. Here is the shape, and where the resource goes.</p>
     </div>
     <div class="who-grid">
       <div class="who-col reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Best with BBD Boom</h3>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Your BBD Boom team</h3>
         <ul>
-          <li>HubSpot configuration</li>
-          <li>Automation and workflows</li>
-          <li>Reporting and dashboards</li>
-          <li>Integration design and orchestration</li>
-          <li>AI setup</li>
+          <li>Lead Consultant (Katie), your domain expert and main contact</li>
+          <li>Project management via Teamwork</li>
+          <li>Dedicated support team</li>
+          <li>Developers and data specialists, on a project basis</li>
         </ul>
       </div>
       <div class="who-col reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Best with your developer</h3>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Your in-house developer</h3>
         <ul>
-          <li>Changes on the iVector, Lambda and CMS side</li>
-          <li>Pushing booking and conversion data into HubSpot to our specification</li>
+          <li>Day-to-day front-end fixes and configuration</li>
+          <li>Knows your systems well</li>
+          <li>Works best with clear direction</li>
+          <li>Now guided by Katie, not by you</li>
         </ul>
       </div>
       <div class="who-col reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Decided together</h3>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>Where the resource goes</h3>
         <ul>
-          <li>The build approach for the native quote integration</li>
-          <li>Anything that touches both sides at once</li>
+          <li>Strategy, prioritisation and configuration: Katie and the team</li>
+          <li>Day-to-day fixes: your developer or our support</li>
+          <li>Bigger dev and data work, like iVector: our developers, scoped as a project</li>
         </ul>
       </div>
     </div>
-    <p class="who-close">For each strategic project we agree who builds what in a short scoping step, based on what delivers the best result fastest.</p>
+    <p class="who-close">Our model is not a fixed block of project management, front-end and dev hours. It is a senior domain expert who removes the briefing burden, with specialists added when a project needs them. So the costings are not strictly like for like, and the difference is mostly in where the expertise sits.</p>
   </div>
 </section>
 
@@ -759,7 +888,7 @@
   <div class="wrap reveal">
     <span class="eyebrow">Next step</span>
     <h2>A detailed proposal follows, with scope and pricing.</h2>
-    <p>It covers the quick wins and the first strategic project, so you can see exactly what it takes to start driving revenue.</p>
+    <p>It sets out the partnership, the strategic projects and how we will work together, so you can see exactly what it takes to start driving revenue.</p>
   </div>
 </section>
 
