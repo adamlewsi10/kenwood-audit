@@ -69,13 +69,26 @@
   .story-copy{max-width:820px;}
   .story-copy p{font-size:16.5px;color:var(--slate);margin-bottom:18px;}
   .story-copy p strong{color:var(--ink);}
-  .themes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;}
-  .theme{background:var(--cloud);border:1px solid var(--line);border-radius:14px;padding:28px 26px;transition:transform .25s ease,box-shadow .25s ease;}
-  .theme:hover{transform:translateY(-4px);box-shadow:var(--shadow-lift);}
-  .theme .dot{width:38px;height:38px;border-radius:9px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
-  .theme .dot svg{width:20px;height:20px;stroke:var(--teal);}
-  .theme h3{font-size:17px;color:var(--navy);margin-bottom:9px;}
-  .theme p{font-size:14.5px;color:var(--slate);}
+  /* Capability vs activation gap visual */
+  .gap-viz{margin-top:48px;background:linear-gradient(160deg,var(--cloud) 0%,#F2F7FC 100%);border:1px solid var(--line);border-radius:18px;padding:42px 46px 38px;position:relative;overflow:hidden;}
+  .gap-viz::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal) 0%,var(--teal) 35%,#E2EAF2 35%,#E2EAF2 100%);}
+  .gap-row{display:grid;grid-template-columns:230px 1fr;gap:28px;align-items:center;margin-bottom:22px;}
+  .gap-row:last-of-type{margin-bottom:0;}
+  .gap-label{display:flex;flex-direction:column;gap:4px;}
+  .gap-title{font-size:14.5px;font-weight:600;color:var(--navy);letter-spacing:.2px;}
+  .gap-sub{font-size:12.5px;color:var(--mist);line-height:1.45;}
+  .gap-bar{position:relative;height:42px;background:#E7EFF7;border-radius:8px;overflow:hidden;display:flex;align-items:center;}
+  .gap-fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-size:13px;font-weight:700;color:var(--white);letter-spacing:.3px;border-radius:8px 0 0 8px;}
+  .gap-fill-cap{background:linear-gradient(90deg,#0F2A44 0%,var(--navy) 100%);}
+  .gap-fill-act{background:linear-gradient(90deg,var(--teal) 0%,#27B8B5 100%);}
+  .gap-divider{display:flex;align-items:center;gap:14px;margin:24px 0 22px;}
+  .gap-divider::before,.gap-divider::after{content:"";flex:1;height:1px;background:var(--line);}
+  .gap-divider span{font-size:11.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--mist);font-weight:600;}
+  .gap-caption{display:flex;align-items:flex-start;gap:14px;padding:22px 24px;background:var(--white);border:1px solid var(--line);border-radius:12px;border-left:3px solid var(--teal);}
+  .gap-caption .gap-mark{flex:0 0 auto;width:34px;height:34px;border-radius:8px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;}
+  .gap-caption .gap-mark svg{width:18px;height:18px;stroke:var(--teal);}
+  .gap-caption p{font-size:15px;color:var(--slate);line-height:1.55;margin:0;}
+  .gap-caption strong{color:var(--navy);}
 
   /* JOURNEY */
   .journey{background:var(--navy);color:var(--white);}
@@ -212,7 +225,10 @@
   footer .f-right{text-align:right;}
 
   @media(max-width:860px){
-    .themes,.out-grid{grid-template-columns:1fr;}
+    .out-grid{grid-template-columns:1fr;}
+    .gap-viz{padding:28px 22px;}
+    .gap-row{grid-template-columns:1fr;gap:10px;}
+    .gap-bar{height:36px;}
     .ba{grid-template-columns:1fr;}
     .crit-list{grid-template-columns:1fr;}
     .nodes{grid-template-columns:1fr;gap:26px;}
@@ -302,24 +318,28 @@
     </div>
     <div class="story-copy reveal">
       <p>Kenwood has invested well in HubSpot. Three premium hubs (Marketing Hub Enterprise, Sales Hub Professional and Service Hub Professional), a sensible data structure, and a working iVector integration. The foundation is strong.</p>
-      <p>The audit also makes clear there is more to do. The platform is configured but not yet activated, and because a few key steps still run outside HubSpot, some reports currently mislead rather than inform. None of that is a reflection on the team. It is a setup that was stood up quickly and never fully switched on. The encouraging part: <strong>the gap is activation, not capability</strong>. Almost every fix is something you already own the licence for. This is about switching on and tuning what you have, not rebuilding it.</p>
+      <p>The audit also makes clear there is more to do. The platform is configured but not yet activated, and because a few key steps still run outside HubSpot, some reports currently mislead rather than inform. None of that is a reflection on the team. It is a setup that was stood up quickly and never fully switched on.</p>
     </div>
 
-    <div class="themes">
-      <div class="theme reveal">
-        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
-        <h3>Conversions are invisible</h3>
-        <p>The quoting iframe was a sensible quick workaround, but it means bookings convert outside HubSpot's view, so marketing cannot yet act on what converts.</p>
+    <div class="gap-viz reveal">
+      <div class="gap-row">
+        <div class="gap-label">
+          <span class="gap-title">Capability you've licensed</span>
+          <span class="gap-sub">Marketing Enterprise, Sales Pro, Service Pro</span>
+        </div>
+        <div class="gap-bar"><div class="gap-fill gap-fill-cap" style="width:96%;">96%</div></div>
       </div>
-      <div class="theme reveal">
-        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
-        <h3>Lead handling is manual</h3>
-        <p>Routing, availability logic and an SLA were never built, so today the speed of a reply depends on who picks it up rather than on the system.</p>
+      <div class="gap-row">
+        <div class="gap-label">
+          <span class="gap-title">Capability you're using today</span>
+          <span class="gap-sub">Configured, but not yet switched on</span>
+        </div>
+        <div class="gap-bar"><div class="gap-fill gap-fill-act" style="width:35%;">~35%</div></div>
       </div>
-      <div class="theme reveal">
-        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></div>
-        <h3>The data is not yet trustworthy</h3>
-        <p>There was never one agreed way to tag sources, so regional conversion, source conversion and speed to quote do not yet hold up.</p>
+      <div class="gap-divider"><span>the gap</span></div>
+      <div class="gap-caption">
+        <div class="gap-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <p><strong>The gap is activation, not capability.</strong> Almost every fix is something Kenwood already owns the licence for. This is about switching on and tuning what you have, not rebuilding it.</p>
       </div>
     </div>
   </div>
