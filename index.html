@@ -66,11 +66,10 @@
 
   /* STORY */
   .story{background:var(--white);}
-  .story-copy{max-width:820px;}
-  .story-copy p{font-size:16.5px;color:var(--slate);margin-bottom:18px;}
-  .story-copy p strong{color:var(--ink);}
+  .story-head{max-width:880px;margin-bottom:8px;}
+  .story-head h2{font-size:38px;line-height:1.15;letter-spacing:-0.6px;margin-top:8px;}
   /* Capability vs activation gap visual */
-  .gap-viz{margin-top:48px;background:linear-gradient(160deg,var(--cloud) 0%,#F2F7FC 100%);border:1px solid var(--line);border-radius:18px;padding:42px 46px 38px;position:relative;overflow:hidden;}
+  .gap-viz{margin-top:42px;background:linear-gradient(160deg,var(--cloud) 0%,#F2F7FC 100%);border:1px solid var(--line);border-radius:18px;padding:42px 46px 38px;position:relative;overflow:hidden;}
   .gap-viz::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal) 0%,var(--teal) 35%,#E2EAF2 35%,#E2EAF2 100%);}
   .gap-row{display:grid;grid-template-columns:230px 1fr;gap:28px;align-items:center;margin-bottom:22px;}
   .gap-row:last-of-type{margin-bottom:0;}
@@ -84,11 +83,13 @@
   .gap-divider{display:flex;align-items:center;gap:14px;margin:24px 0 22px;}
   .gap-divider::before,.gap-divider::after{content:"";flex:1;height:1px;background:var(--line);}
   .gap-divider span{font-size:11.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--mist);font-weight:600;}
-  .gap-caption{display:flex;align-items:flex-start;gap:14px;padding:22px 24px;background:var(--white);border:1px solid var(--line);border-radius:12px;border-left:3px solid var(--teal);}
-  .gap-caption .gap-mark{flex:0 0 auto;width:34px;height:34px;border-radius:8px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;}
-  .gap-caption .gap-mark svg{width:18px;height:18px;stroke:var(--teal);}
-  .gap-caption p{font-size:15px;color:var(--slate);line-height:1.55;margin:0;}
-  .gap-caption strong{color:var(--navy);}
+  .gap-impacts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .gap-impact{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px 22px 22px;border-top:3px solid var(--coral,#E66B5A);transition:transform .25s ease,box-shadow .25s ease;}
+  .gap-impact:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);}
+  .gap-impact .gap-icon{width:36px;height:36px;border-radius:9px;background:#FCE9E4;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .gap-impact .gap-icon svg{width:18px;height:18px;stroke:#D14E3A;}
+  .gap-impact h4{font-size:15.5px;color:var(--navy);margin-bottom:6px;font-weight:600;letter-spacing:.1px;}
+  .gap-impact p{font-size:13.5px;color:var(--slate);line-height:1.55;margin:0;}
 
   /* JOURNEY */
   .journey{background:var(--navy);color:var(--white);}
@@ -229,6 +230,8 @@
     .gap-viz{padding:28px 22px;}
     .gap-row{grid-template-columns:1fr;gap:10px;}
     .gap-bar{height:36px;}
+    .gap-impacts{grid-template-columns:1fr;}
+    .story-head h2{font-size:26px;}
     .ba{grid-template-columns:1fr;}
     .crit-list{grid-template-columns:1fr;}
     .nodes{grid-template-columns:1fr;gap:26px;}
@@ -312,34 +315,44 @@
 <!-- STORY -->
 <section class="story">
   <div class="wrap">
-    <div class="reveal">
+    <div class="story-head reveal">
       <span class="eyebrow">The story so far</span>
       <h2>A strong foundation, with most of the value still to come.</h2>
-    </div>
-    <div class="story-copy reveal">
-      <p>Kenwood has invested well in HubSpot. Three premium hubs (Marketing Hub Enterprise, Sales Hub Professional and Service Hub Professional), a sensible data structure, and a working iVector integration. The foundation is strong.</p>
-      <p>The audit also makes clear there is more to do. The platform is configured but not yet activated, and because a few key steps still run outside HubSpot, some reports currently mislead rather than inform. None of that is a reflection on the team. It is a setup that was stood up quickly and never fully switched on.</p>
     </div>
 
     <div class="gap-viz reveal">
       <div class="gap-row">
         <div class="gap-label">
-          <span class="gap-title">Capability you've licensed</span>
+          <span class="gap-title">Capability you've paid for</span>
           <span class="gap-sub">Marketing Enterprise, Sales Pro, Service Pro</span>
         </div>
         <div class="gap-bar"><div class="gap-fill gap-fill-cap" style="width:96%;">96%</div></div>
       </div>
       <div class="gap-row">
         <div class="gap-label">
-          <span class="gap-title">Capability you're using today</span>
-          <span class="gap-sub">Configured, but not yet switched on</span>
+          <span class="gap-title">Capability you're using</span>
+          <span class="gap-sub">Configured, not yet switched on</span>
         </div>
         <div class="gap-bar"><div class="gap-fill gap-fill-act" style="width:35%;">~35%</div></div>
       </div>
-      <div class="gap-divider"><span>the gap</span></div>
-      <div class="gap-caption">
-        <div class="gap-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <p><strong>The gap is activation, not capability.</strong> Almost every fix is something Kenwood already owns the licence for. This is about switching on and tuning what you have, not rebuilding it.</p>
+      <div class="gap-divider"><span>The gap = activation</span></div>
+
+      <div class="gap-impacts">
+        <div class="gap-impact">
+          <div class="gap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h4>Wasted investment</h4>
+          <p>Paying for Enterprise capability that isn't switched on. Licence value walks out of the door every month it sits idle.</p>
+        </div>
+        <div class="gap-impact">
+          <div class="gap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <h4>Falling behind the market</h4>
+          <p>AI agents, predictive scoring and automation are already table stakes in travel marketing. Standing still is moving backwards.</p>
+        </div>
+        <div class="gap-impact">
+          <div class="gap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h4>Losing ground to competitors</h4>
+          <p>Operators that have switched theirs on respond faster, convert more, and learn quicker. The longer the gap stays open, the harder it is to close.</p>
+        </div>
       </div>
     </div>
   </div>
